@@ -14,7 +14,6 @@ public class Plano {
         this.alunos = new ArrayList<>();
     }
     
-
     public List<Aluno> getAlunos() {
         return alunos;
     }

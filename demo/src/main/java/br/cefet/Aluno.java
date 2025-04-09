@@ -12,6 +12,7 @@ public class Aluno {
     private String telefone;
     private float imc;
     private Plano plano;
+    private Professor professor;
 
     public Aluno(String nome, int matricula){
         this.nome = nome;
