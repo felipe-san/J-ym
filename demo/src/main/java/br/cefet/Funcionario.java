@@ -1,8 +1,4 @@
 package br.cefet;
-
-import java.util.ArrayList;
-import java.util.List;
-
 public class Funcionario {
     private int matricula;
     private boolean disponivel;
@@ -19,7 +15,6 @@ public class Funcionario {
     private String ctps;
     private String email;
     private String telefone;
-    private List<Aluno> alunos;
 
     public Funcionario(int matricula, boolean disponivel, float salario, String nome, String cargo, String setor, String dataNascimento, String tipoContrato, String status, String dataAdmissao, String cpf, String endereco, String ctps, String email, String telefone){
         setCargo(cargo);
@@ -37,7 +32,6 @@ public class Funcionario {
         setStatus(status);
         setTelefone(telefone);
         setTipoContrato(tipoContrato);
-        alunos = new ArrayList<>();
     }
     
     public String getNome(){
@@ -103,7 +97,7 @@ public class Funcionario {
     public void setCtps(String ctps) {
         this.ctps = ctps;
     }
-
+    
     public void setDataAdmissao(String dataAdmissao){
         this.dataAdmissao = dataAdmissao;
     }
@@ -162,10 +156,6 @@ public class Funcionario {
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
-    }
-
-    public void addAluno(Aluno aluno){
-        alunos.add(aluno);
     }
 }
 

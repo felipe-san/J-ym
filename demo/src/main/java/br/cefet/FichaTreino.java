@@ -15,7 +15,15 @@ public class FichaTreino {
         return nome;
     }
 
-    public String getExercicios(){
+    public List<Exercicio> getExercicios(){
         return exercicios;
+    }
+
+    public void setNome(String nome){
+        this.nome = nome;
+    }
+
+    public void addExercicio(Exercicio exercicio){
+        exercicios.add(exercicio);
     }
 }
