@@ -69,6 +69,31 @@ public class Main {
             System.out.printf("Nome: %s - Matricula: %d\n", aluno.getNome(), aluno.getMatricula());
         }
         
+        FichaTreino fi1 = new FichaTreino();
+        Exercicio ex1 = new Exercicio();
+        fi1.setNome("Ficha de treino superiores");
+        ex1.setNome("Supino Reto deitado");
+        ex1.setLocal("Maquina com manopla e banco");
+        ex1.setCarga(15);
+        ex1.setRepeticoes(10);
+        ex1.setSeries(4);
+
+        Exercicio ex2 = new Exercicio();
+        ex2.setNome("Desenvolvimento");
+        ex2.setLocal("Maquina de desenvolvimento com placa");
+        ex2.setCarga(75);
+        ex2.setRepeticoes(10);
+        ex2.setSeries(4);
+
+        fi1.addExercicio(ex2);
+        fi1.addExercicio(ex1);
+
+        System.out.println();
+        System.out.println();
+        System.out.println(fi1.getNome());
+        for (Exercicio exercicio : fi1.getExercicios()){
+            System.out.printf("Nome: %s\nLocal: %s\nCarga: %.2f\nRepeticoes: %d\nSeries: %d\n\n", exercicio.getNome(), exercicio.getLocal(), exercicio.getCarga(), exercicio.getRepeticoes(), exercicio.getSeries());
+        }
 
     }
 }
