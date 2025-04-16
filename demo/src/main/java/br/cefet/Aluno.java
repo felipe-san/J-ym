@@ -4,7 +4,7 @@ public class Aluno {
     private String cpf;
     private String endereco;
     private int matricula;
-    private String dnascimento;
+    private String dataNascimento;
     private String genero;
     private float peso;
     private float altura;
@@ -13,9 +13,9 @@ public class Aluno {
     private float imc;
     private Plano plano;
 
-    public Aluno(String nome, int matricula){
-        this.nome = nome;
-        this.matricula = matricula;
+    public Aluno(String nome, int matricula, String dataNascimento){
+        setNome(nome);
+        
     }
 
     public Plano getPlano(){
@@ -38,8 +38,8 @@ public class Aluno {
         return matricula; 
     }
     
-    public String getDnascimento() {
-        return dnascimento;
+    public String getDataNascimento() {
+        return dataNascimento;
     }
     
     public String getGenero() {
@@ -74,8 +74,8 @@ public class Aluno {
         this.cpf = cpf;
     }
 
-    public void setDnascimento(String dnascimento) {
-        this.dnascimento = dnascimento;
+    public void setDataNascimento(String dataNascimento) {
+        this.dataNascimento = dataNascimento;
     }
 
     public void setEmail(String email) {

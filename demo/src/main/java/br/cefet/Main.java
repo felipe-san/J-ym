@@ -14,7 +14,7 @@ public class Main {
         String[] nomes = {"Vito", "Felipe", "Jeovanna", "Bianca", "Jorge"};
         String[] nomes_equips = {"Supino reto com barra", "Desenvolvimento com placa", "Leg Press 45", "Cadeira Extensora"};
 
-        Aluno n1 = new Aluno(nomes[sortearNumero(nomes)], 01);
+        Aluno n1 = new Aluno(nomes[sortearNumero(nomes)], 01, "02/03/2005");
         System.out.printf("\nNome 1: %s", n1.getNome());
         
         n1.setNome(nomes[sortearNumero(nomes)]);
@@ -38,11 +38,11 @@ public class Main {
         
 
         n1.setPlano(p1);
-        Aluno n2 = new Aluno(nomes[sortearNumero(nomes)], 02);
+        Aluno n2 = new Aluno(nomes[sortearNumero(nomes)], 02, "05/07/2008");
         n2.setPlano(p1);
-        Aluno n3 = new Aluno(nomes[sortearNumero(nomes)], 03);
+        Aluno n3 = new Aluno(nomes[sortearNumero(nomes)], 03, "12/02/2003");
         n3.setPlano(p1);
-        Aluno n4 = new Aluno(nomes[sortearNumero(nomes)], 04);
+        Aluno n4 = new Aluno(nomes[sortearNumero(nomes)], 04, "19/09/2001");
         n4.setPlano(p1);
 
         Plano p2 = new Plano();
