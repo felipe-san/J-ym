@@ -1,4 +1,8 @@
 package br.cefet;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class Aluno {
     private String nome;
     private String cpf;
@@ -9,13 +13,15 @@ public class Aluno {
     private float peso;
     private float altura;
     private String email;
-    private String telefone;
+    private List<String> telefones;
     private float imc;
     private Plano plano;
 
     public Aluno(String nome, int matricula, String dataNascimento){
+        this.telefones = new ArrayList<>();
         setNome(nome);
-        
+        setMatricula(matricula);
+        setDataNascimento(dataNascimento);
     }
 
     public Plano getPlano(){
@@ -58,8 +64,8 @@ public class Aluno {
         return altura;
     }
 
-    public String getTelefone() {
-        return telefone;
+    public List<String> getTelefones() {
+        return telefones;
     }
 
     public float getImc() {
@@ -113,8 +119,8 @@ public class Aluno {
         this.peso = peso;
     }
 
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
+    public void addTelefone(String telefone){
+        this.telefones.add(telefone);
     }
 
     public void cadastro(){
