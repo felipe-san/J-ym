@@ -45,6 +45,17 @@ public class Main {
         Aluno n4 = new Aluno(nomes[sortearNumero(nomes)], 04, "19/09/2001");
         n4.setPlano(p1);
 
+        List<Aluno> alunos = new ArrayList<>();
+
+        alunos.add(n1);
+        alunos.add(n2);
+        alunos.add(n3);
+        alunos.add(n4);
+
+        n1.addTelefone("(21) 98990-3940");
+        n1.addTelefone("(22) 98394-4520");
+        n3.addTelefone("(21) 98201-1234");
+
         Plano p2 = new Plano();
         p2.setTipo("De morador");
 
@@ -94,6 +105,23 @@ public class Main {
         for (Exercicio exercicio : fi1.getExercicios()){
             System.out.printf("Nome: %s\nLocal: %s\nCarga: %.2f\nRepeticoes: %d\nSeries: %d\n\n", exercicio.getNome(), exercicio.getLocal(), exercicio.getCarga(), exercicio.getRepeticoes(), exercicio.getSeries());
         }
+
+        System.out.printf("\nTelefones:\n");
+
+        for (Aluno aluno : alunos){
+            System.out.printf("\n%s\n", aluno.getNome());
+            if (aluno.getTelefones().isEmpty()){
+                System.out.println("Esse aluno não tem telefone nenhum cadastrado.");
+            }
+            else{
+                
+                for (String telefone : aluno.getTelefones()){
+                    System.out.printf("Telefone: %s\n", telefone);
+                }
+                
+            }
+        }
+
 
     }
 }
