@@ -3,6 +3,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import br.cefet.Documento.tipoDocumento;
+
 public class Main {
     
     public static int sortearNumero(String[] nomes){
@@ -14,7 +16,8 @@ public class Main {
         String[] nomes = {"Vito", "Felipe", "Jeovanna", "Bianca", "Jorge"};
         String[] nomes_equips = {"Supino reto com barra", "Desenvolvimento com placa", "Leg Press 45", "Cadeira Extensora"};
 
-        
+        Documento d1 = new Documento(tipoDocumento.CPF, "155.066.557-03");
+        System.out.printf("\nTipo doc: %s - Codigo: %s\n", d1.getTipo(), d1.getConteudo());        
 
     }
 }
