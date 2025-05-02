@@ -1,5 +1,5 @@
 package br.cefet;
 
-public class Endereco {
+public enum Endereco {
 
 }

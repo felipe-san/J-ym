@@ -1,5 +1,5 @@
 package br.cefet;
 
-public class Contato {
+public enum Contato {
 
 }
