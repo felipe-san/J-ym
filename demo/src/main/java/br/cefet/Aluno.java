@@ -12,11 +12,11 @@ public class Aluno extends Pessoa{
     //private float peso; // vai pra avaliacao
     //private float altura; // vai pra avaliacao
     //private String email; // vai pra contato
-    //private List<String> telefones; tem q excluir
     // private float imc; // vai pra avaliacao
     // private Plano plano; // vai pra assinatura
 
-    public Aluno(){
+    public Aluno(String nome, int matricula){
+        super(nome, matricula);
     }
 
    
