@@ -12,17 +12,19 @@ public class Main {
 
     public static void main(String[] args){
         String[] nomes = {"Vito", "Felipe", "Jeovanna", "Bianca", "Jorge", "Davi Monteiro"};
-        String[] nomes_equips = {"Supino reto com barra", "Desenvolvimento com placa", "Leg Press 45", "Cadeira Extensora"};
-
-        Documento d1 = new Documento(TipoDocumento.CPF, "155.066.557-03");
-        System.out.printf("\nTipo doc: %s - Codigo: %s\n", d1.getTipo(), d1.getConteudo());        
+        String[] nomes_equips = {"Supino reto com barra", "Desenvolvimento com placa", "Leg Press 45", "Cadeira Extensora"};      
 
         Random rand1 = new Random();
+        int matricula = rand1.nextInt(200);
 
-        Pessoa p1 = new Pessoa(nomes[sortearNumero(nomes)], rand1.nextInt(200));
+        Aluno a1 = new Aluno(nomes[sortearNumero(nomes)], matricula, "155.066.557-03", "03/08/1998", "Masculino");
+        System.out.println(a1.getNome());
+        System.out.println(a1.getCpf());
+        System.out.println(a1.getDataNascimento());
+        System.out.println(a1.getMatricula());
+        System.out.println(a1.getGenero());
 
-        System.out.printf("\n\nNome: %s\nMatricula: %d\n", p1.getNome(), p1.getMatricula());
-
+    
     }
 }
 
