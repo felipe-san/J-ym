@@ -1,21 +1,15 @@
 package br.cefet;
 
 public class Documento {
-    public enum tipoDocumento {
-        CPF,
-        RG,
-        CNH
-    }
-
-    private tipoDocumento tipo;
+    private TipoDocumento tipo;
     private String conteudo;
 
-    public Documento(tipoDocumento tipo, String conteudo){
+    public Documento(TipoDocumento tipo, String conteudo){
         setTipo(tipo);
         setConteudo(conteudo);
     }
 
-    public tipoDocumento getTipo() {
+    public TipoDocumento getTipo() {
         return tipo;
     }
 
@@ -27,7 +21,7 @@ public class Documento {
         this.conteudo = conteudo;
     }
 
-    public void setTipo(tipoDocumento tipo) {
+    public void setTipo(TipoDocumento tipo) {
         this.tipo = tipo;
     }
 }
