@@ -1,5 +1,7 @@
 package br.cefet;
 
-public enum tipoDocumento {
-
+public enum TipoDocumento {
+    CPF,
+    RG,
+    CNH
 }
