@@ -19,7 +19,7 @@ public class Endereco {
         setNumero(numero);
     }
 
-    public String getLogradouro(){
+    public String getLogradouro() {
         return logradouro;
     }
 
