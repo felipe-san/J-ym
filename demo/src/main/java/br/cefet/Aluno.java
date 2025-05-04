@@ -12,8 +12,8 @@ public class Aluno extends Pessoa{
     // private float imc; // vai pra avaliacao
     // private Plano plano; // vai pra assinatura
 
-    public Aluno(String nome, int matricula, String cpf, String dataNascimento, String genero){
-        super(nome, matricula, cpf, dataNascimento, genero);
+    public Aluno(String nome, int matricula, String dataNascimento, String genero){
+        super(nome, matricula, dataNascimento, genero);
     }
 
     public Assinatura getAssinatura() {

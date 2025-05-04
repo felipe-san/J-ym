@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 public class Pessoa {
     private String nome;
-    private String cpf;
     private int matricula;
     private String dataNascimento;
     private String genero;
@@ -13,20 +12,17 @@ public class Pessoa {
     private Endereco endereco;
     private List<Documento> documentos;
     
-    public Pessoa(String nome, int matricula, String cpf, String dataNascimento, String genero){
+    public Pessoa(String nome, int matricula, String dataNascimento, String genero){
+        documentos = new ArrayList<>();
+        contatos = new ArrayList<>();
         setNome(nome);
         setMatricula(matricula);
         setDataNascimento(dataNascimento);
         setGenero(genero);
-        setCpf(cpf);
     }
 
     public String getNome(){
         return nome;
-    }
-    
-    public String getCpf(){
-        return cpf;
     }
 
     public int getMatricula(){
@@ -53,14 +49,6 @@ public class Pessoa {
         return genero;
     }
 
-    public void setContatos(List<Contato> contatos) {
-        this.contatos = contatos;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
     public void setGenero(String genero) {
         this.genero = genero;
     }
@@ -76,5 +64,18 @@ public class Pessoa {
     public void setMatricula(int matricula){
         this.matricula = matricula;
     }
-    
+
+    public void setEndereco(Endereco endereco){
+        this.endereco = endereco;
+    }
+
+    public void addContato(Contato contato){
+        this.contatos.add(contato);
+    }
+
+    public void addDocumento(Documento documento){
+        this.documentos.add(documento);
+    }
+
+
 }
