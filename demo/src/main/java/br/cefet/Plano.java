@@ -1,21 +1,18 @@
 package br.cefet;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Plano {
     private float valor;
     private String formaPagamento;
-    private String tipo;
+    private TipoPlano tipo;
+    private String dataInicio;
     private String dataVencimento;
-    private List<Aluno> alunos;
     
     public Plano(){
-        this.alunos = new ArrayList<>();
+        
     }
-    
-    public List<Aluno> getAlunos() {
-        return alunos;
+
+    public String getDataInicio() {
+        return dataInicio;
     }
 
     public String getDataVencimento() {
@@ -26,12 +23,16 @@ public class Plano {
         return formaPagamento;
     }
 
-    public String getTipo() {
+    public TipoPlano getTipo() {
         return tipo;
     }
 
     public float getValor() {
         return valor;
+    }
+
+    public void setDataInicio(String dataInicio) {
+        this.dataInicio = dataInicio;
     }
 
     public void setValor(float valor){
@@ -42,7 +43,7 @@ public class Plano {
         this.formaPagamento = formaPagamento;
     }
 
-    public void setTipo(String tipo){
+    public void setTipo(TipoPlano tipo){
         this.tipo = tipo;
     }
 
@@ -50,7 +51,4 @@ public class Plano {
         this.dataVencimento = dataVencimento;
     }
 
-    public void addAluno(Aluno aluno){
-        this.alunos.add(aluno);
-    }
 }
