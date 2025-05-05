@@ -1,7 +1,5 @@
 package br.cefet;
 
-import java.util.List;
-
 public class Assinatura {
     private Plano plano;
     private String dataInicioContrato;
@@ -9,7 +7,10 @@ public class Assinatura {
     private Aluno aluno;
 
     public Assinatura(){
-
+        setAluno(aluno);
+        setDataFimContrato(dataFimContrato);
+        setDataInicioContrato(dataInicioContrato);
+        setPlano(plano);
     }
 
     public String getDataInicioContrato() {
