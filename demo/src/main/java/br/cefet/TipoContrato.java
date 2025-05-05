@@ -1,6 +1,6 @@
 package br.cefet;
 
-public enum tipoContrato {
+public enum TipoContrato {
     PJ,
     CLT
 }

@@ -4,7 +4,7 @@ public class Treinador extends Funcionario {
     private boolean disponivel;
     private String cref;
 
-    public Treinador(int matricula, String cref, boolean disponivel, String genero, float salario, String nome, String setor, String dataNascimento, tipoContrato tipoContrato, String status, String dataAdmissao, String ctps){
+    public Treinador(int matricula, String cref, boolean disponivel, String genero, float salario, String nome, String setor, String dataNascimento, TipoContrato tipoContrato, String status, String dataAdmissao, String ctps){
         super(matricula, genero, salario, nome, setor, dataNascimento, tipoContrato, status, dataAdmissao, ctps);
         setCref(cref);
         setDisponivel(disponivel);

@@ -2,12 +2,12 @@ package br.cefet;
 public class Funcionario extends Pessoa {
     private float salario;
     private String setor;
-    private tipoContrato tipoContrato;
+    private TipoContrato tipoContrato;
     private String status;
     private String dataAdmissao;  
     private String ctps;
 
-    public Funcionario(int matricula, String genero, float salario, String nome, String setor, String dataNascimento, tipoContrato tipoContrato, String status, String dataAdmissao, String ctps){
+    public Funcionario(int matricula, String genero, float salario, String nome, String setor, String dataNascimento, TipoContrato tipoContrato, String status, String dataAdmissao, String ctps){
         super(nome, matricula, dataNascimento, genero);
         setCtps(ctps);
         setDataAdmissao(dataAdmissao);
@@ -27,7 +27,7 @@ public class Funcionario extends Pessoa {
         return status;
     }
 
-    public tipoContrato getTipoContrato(){
+    public TipoContrato getTipoContrato(){
         return tipoContrato;
     }
 
@@ -59,7 +59,7 @@ public class Funcionario extends Pessoa {
         this.status = status;
     }
 
-    public void setTipoContrato(tipoContrato tipoContrato) {
+    public void setTipoContrato(TipoContrato tipoContrato) {
         this.tipoContrato = tipoContrato;
     }
 

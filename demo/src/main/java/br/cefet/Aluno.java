@@ -5,10 +5,7 @@ import java.util.ArrayList;
 
 public class Aluno extends Pessoa{
     private Assinatura assinatura;
-    private List<Avaliacao> avaliacoes;
-    
-    // private float imc; // vai pra avaliacao
-    
+    private List<Avaliacao> avaliacoes;  
 
     public Aluno(String nome, int matricula, String dataNascimento, String genero){
         super(nome, matricula, dataNascimento, genero);
