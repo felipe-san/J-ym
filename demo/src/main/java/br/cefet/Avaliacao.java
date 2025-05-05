@@ -2,6 +2,8 @@ package br.cefet;
 
 public class Avaliacao {
     private float peso;
+    private String dataAvaliacao;
+    private Treinador avaliador;
     private float altura;
     private float medidaCintura;
     private float medidaQuadril;
@@ -25,8 +27,10 @@ public class Avaliacao {
     private String objetivo;
     private boolean doresFadiga;
 
-    public Avaliacao(float peso, float altura, float medidaCintura, float medidaQuadril, float medidaBicepsDireito, float medidaBicepsEsquerdo, float medidaTricepsDireito, float medidaTricepsEsquerdo, float medidaCoxaDireita, float medidaCoxaEsquerda, float medidaPanturrilhaDireita, float medidaPanturrilhaEsquerda, float medidaOmbroAOmbro, float gorduraCorporal, float massaMuscular, float massaMagra, boolean doenteCronico, boolean lesionado, boolean usuarioMedicamento, String objetivo, boolean doresFadiga){
+    public Avaliacao(String dataAvaliacao, Treinador avaliador, float peso, float altura, float medidaCintura, float medidaQuadril, float medidaBicepsDireito, float medidaBicepsEsquerdo, float medidaTricepsDireito, float medidaTricepsEsquerdo, float medidaCoxaDireita, float medidaCoxaEsquerda, float medidaPanturrilhaDireita, float medidaPanturrilhaEsquerda, float medidaOmbroAOmbro, float gorduraCorporal, float massaMuscular, float massaMagra, boolean doenteCronico, boolean lesionado, boolean usuarioMedicamento, String objetivo, boolean doresFadiga){
         setAltura(altura);
+        setAvaliador(avaliador);
+        setDataAvaliacao(dataAvaliacao);
         setDoenteCronico(doenteCronico);
         setDoresFadiga(doresFadiga);
         setLesionado(lesionado);
@@ -51,6 +55,14 @@ public class Avaliacao {
         setPressao(pressao);
     }
     
+    public Treinador getAvaliador() {
+        return avaliador;
+    }
+
+    public String getDataAvaliacao() {
+        return dataAvaliacao;
+    }
+
     public float getAltura() {
         return altura;
     }
@@ -165,6 +177,14 @@ public class Avaliacao {
 
     public void setObjetivo(String objetivo) {
         this.objetivo = objetivo;
+    }
+
+    public void setAvaliador(Treinador avaliador) {
+        this.avaliador = avaliador;
+    }
+
+    public void setDataAvaliacao(String dataAvaliacao) {
+        this.dataAvaliacao = dataAvaliacao;
     }
 
     public void setPressao(String pressao) {

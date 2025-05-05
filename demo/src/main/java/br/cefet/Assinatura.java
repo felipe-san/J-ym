@@ -6,7 +6,7 @@ public class Assinatura {
     private String dataFimContrato;
     private Aluno aluno;
 
-    public Assinatura(){
+    public Assinatura(Aluno aluno, String dataInicioContrato, String dataFimContrato, Plano plano){
         setAluno(aluno);
         setDataFimContrato(dataFimContrato);
         setDataInicioContrato(dataInicioContrato);

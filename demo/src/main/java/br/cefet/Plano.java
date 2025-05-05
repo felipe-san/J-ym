@@ -7,8 +7,12 @@ public class Plano {
     private String dataInicio;
     private String dataVencimento;
     
-    public Plano(){
-        
+    public Plano(float valor, String formaPagamento, TipoPlano tipo, String dataInicio, String dataVencimento){
+        setDataInicio(dataInicio);
+        setDataVencimento(dataVencimento);
+        setFormaPagamento(formaPagamento);
+        setTipo(tipo);
+        setValor(valor);        
     }
 
     public String getDataInicio() {
