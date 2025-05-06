@@ -61,6 +61,7 @@ public class Main {
         System.out.println();
         testarPessoa(t1);
         System.out.println();
+        System.out.println();
     }
 
     
