@@ -3,7 +3,7 @@ package br.cefet;
 import java.util.List;
 import java.util.ArrayList;
 
-public class Pessoa {
+public abstract class Pessoa {
     private String nome;
     private int matricula;
     private String dataNascimento;

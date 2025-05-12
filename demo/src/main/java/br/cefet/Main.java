@@ -52,7 +52,7 @@ public class Main {
         a1.addDocumento(new Documento(TipoDocumento.CPF, "145.026.552-03"));
         a1.addContato(new Contato(TipoContato.EMAIL, "kieran.ershaw@hotmail.com"));
         a1.setEndereco(new Endereco("Rua Cherente", 245, "Fundos", "Engenho da Rainha", "Rio de Janeiro", "20766-590", "RJ"));
-        a1.setAssinatura(new Assinatura(a1, "01/02/2025", "01/02/2026", new Plano(115, "Cartao Credito", TipoPlano.ANUAL, "01/02/2025", "Final da assinatura")));
+        a1.setAssinatura(new Assinatura(a1, t1, "01/02/2025", "01/02/2026", new Plano(115, "Cartao Credito", TipoPlano.ANUAL, "01/02/2025", "Final da assinatura")));
         a1.addAvaliacao(new Avaliacao("01/02/2025", t1, matricula, matricula, matricula, matricula, matricula, matricula, matricula, matricula, matricula, matricula, matricula, matricula, matricula, matricula, matricula, matricula, false, false, false, null, false));
 
         testarPessoa(a1);
@@ -62,6 +62,8 @@ public class Main {
         testarPessoa(t1);
         System.out.println();
         System.out.println();
+
+        
     }
 
     
