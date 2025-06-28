@@ -1,17 +1,76 @@
 package br.cefet.view;
 
 import java.util.Scanner;
-
 import br.cefet.controller.AtendenteController;
-import br.cefet.model.Atendente;
+import br.cefet.model.TipoContrato;
+import br.cefet.model.TipoTurno;
 
 public class ScanAtendente {
     public ScanAtendente(){
+        //Creating and initializating important attributes
+        TipoTurno turno = TipoTurno.MANHA;
+        String flag;
         Scanner scanner = new Scanner(System.in);
+        AtendenteController atendenteController = new AtendenteController();
+        
+        //Scanning nome
         System.out.printf("Digite o nome: ");
         String nome = scanner.nextLine();
-        AtendenteController atendenteController = new AtendenteController();
-        atendenteController.criarAtendente(nome);
+        
+        //Scanning turno
+        do{
+            System.out.println("Escolha o turno:");
+            System.out.println("1 - MANHA" + "\n2 - TARDE" + "\n3 - NOITE");
+            flag = scanner.nextLine();
+            flag = atendenteController.checkFlag(flag);
+        } while (flag == "invalido");
+
+        turno = TipoTurno.values()[Integer.parseInt(flag) - 1];
+
+        //Scanning matricula
+        System.out.printf("\nDigite a matrícula: ");
+        int matricula = Integer.parseInt(scanner.nextLine());
+
+        //Scanning genero
+        System.out.printf("\nDigite o genero: ");
+        String genero = scanner.nextLine();
+
+        //Scanning salario
+        System.out.printf("\nDigite o salário: ");
+        float salario = Float.parseFloat(scanner.nextLine());
+
+        //Scanning setor
+        System.out.printf("\nDigite o setor: ");
+        String setor = scanner.nextLine();
+
+        //Scanning dataNascimento
+        System.out.printf("\nDigite a data de nascimento: ");
+        String dataNascimento = scanner.nextLine();
+
+        //Scanning tipoContrato
+        do{
+            System.out.println("Escolha o contrato:");
+            System.out.println("1 - PJ" + "\n2 - CLT" + "\n3 - PRESTADOR DE SERVIÇOS");
+            flag = scanner.nextLine();
+            flag = atendenteController.checkFlag(flag);
+        } while (flag == "invalido");
+
+        TipoContrato tipoContrato = TipoContrato.values()[Integer.parseInt(flag) - 1];
+
+        //Scanning status
+        System.out.printf("\nDigite o status: ");
+        String status = scanner.nextLine();
+
+        //Scanning dataAdmissao
+        System.out.printf("\nDigite a data de admissão: ");
+        String dataAdmissao = scanner.nextLine();
+
+        //Scanning ctps
+        System.out.printf("\nDigite a CTPS: ");
+        String ctps = scanner.nextLine();
+
+        //calling controller
+        atendenteController.criarAtendente(turno, matricula, genero, salario, nome, setor, dataNascimento, tipoContrato, status, dataAdmissao, ctps);
         
     }
 }
