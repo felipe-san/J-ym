@@ -3,9 +3,20 @@ package br.cefet.dao;
 import br.cefet.model.Atendente;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AtendenteDAO {
 
+    public AtendenteDAO(){
+
+    }
+
+    public List<Atendente> lerAtendentes(){
+        List<Atendente> atendentes = new ArrayList<>();
+        
+        return atendentes;
+    }
 
     public void criarAtendente(Atendente atendente){
         System.out.println("Salvando atendente");
@@ -18,7 +29,7 @@ public class AtendenteDAO {
             System.out.println(atendente.getNome());
 
         } catch (IOException e){
-            System.out.println("deu merda...");
+            System.out.println("DAO deu merda...");
             e.printStackTrace();
         }
         

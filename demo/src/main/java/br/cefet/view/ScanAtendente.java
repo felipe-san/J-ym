@@ -6,11 +6,36 @@ import br.cefet.model.TipoContrato;
 import br.cefet.model.TipoTurno;
 
 public class ScanAtendente {
+    private final Scanner scanner = new Scanner(System.in);
+    private final AtendenteController atendenteController;
+    private String flag;
+
     public ScanAtendente(){
+        atendenteController = new AtendenteController();
+    }
+        
+    public void iniciarAtendente(){
+        do {
+            System.out.println("Escolha uma opção:\n1 - Criar atendente\n2 - Ver Atendentes\n3 - Atualizar\n4 - Destruir\n");
+            flag = scanner.nextLine();
+            flag = atendenteController.checkFlag(flag, "1234");
+        } while (flag == "invalido");
+        
+        switch (flag) {
+            case "1":
+                criarAtendente();
+                break;
+        
+            default:
+                break;
+        }
+
+    }
+
+    private void criarAtendente(){
         //Creating and initializating important attributes
         TipoTurno turno = TipoTurno.MANHA;
-        String flag;
-        Scanner scanner = new Scanner(System.in);
+
         AtendenteController atendenteController = new AtendenteController();
         
         //Scanning nome
@@ -22,7 +47,7 @@ public class ScanAtendente {
             System.out.println("Escolha o turno:");
             System.out.println("1 - MANHA" + "\n2 - TARDE" + "\n3 - NOITE");
             flag = scanner.nextLine();
-            flag = atendenteController.checkFlag(flag);
+            flag = atendenteController.checkFlag(flag, "123");
         } while (flag == "invalido");
 
         turno = TipoTurno.values()[Integer.parseInt(flag) - 1];
@@ -52,7 +77,7 @@ public class ScanAtendente {
             System.out.println("Escolha o contrato:");
             System.out.println("1 - PJ" + "\n2 - CLT" + "\n3 - PRESTADOR DE SERVIÇOS");
             flag = scanner.nextLine();
-            flag = atendenteController.checkFlag(flag);
+            flag = atendenteController.checkFlag(flag, "123");
         } while (flag == "invalido");
 
         TipoContrato tipoContrato = TipoContrato.values()[Integer.parseInt(flag) - 1];
@@ -71,6 +96,10 @@ public class ScanAtendente {
 
         //calling controller
         atendenteController.criarAtendente(turno, matricula, genero, salario, nome, setor, dataNascimento, tipoContrato, status, dataAdmissao, ctps);
+        
+    }
+
+    private void lerAtendentes(){
         
     }
 }

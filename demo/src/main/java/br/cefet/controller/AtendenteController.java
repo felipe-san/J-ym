@@ -1,29 +1,31 @@
 package br.cefet.controller;
 
+import java.util.List;
+
+import br.cefet.dao.AtendenteDAO;
 import br.cefet.model.Atendente;
 import br.cefet.model.TipoContrato;
 import br.cefet.model.TipoTurno;
 
 public class AtendenteController {
-    public void criarAtendente(TipoTurno turno, int matricula, String genero, float salario, String nome, String setor, String dataNascimento, TipoContrato tipoContrato, String status, String dataAdmissao, String ctps){
-        Atendente atendente = new Atendente(turno, matricula, genero, salario, nome, setor, dataNascimento, tipoContrato, status, dataAdmissao, ctps);
-        atendente.criarAtendente();
+    private AtendenteDAO atendenteDAO;
+
+    public AtendenteController(){
+        atendenteDAO = new AtendenteDAO();
     }
 
-    public String checkFlag(String flag){
-        switch (flag) {
-            case "1":
-                break;
-            case "2":
-                break;
-            case "3":
-                break;
-        
-            default:
-                System.out.println("Opção inválida.");
-                flag = "invalido";
-                break;
+    public void criarAtendente(TipoTurno turno, int matricula, String genero, float salario, String nome, String setor, String dataNascimento, TipoContrato tipoContrato, String status, String dataAdmissao, String ctps){
+        Atendente atendente = new Atendente(turno, matricula, genero, salario, nome, setor, dataNascimento, tipoContrato, status, dataAdmissao, ctps);
+        atendenteDAO.criarAtendente(atendente);
+    }
+
+    public String checkFlag(String flag, String options){
+        if (!options.contains(flag)){
+            System.out.println("Opção inválida.");
+            flag = "invalido";
         }
         return flag;
     }
+
+   
 }
