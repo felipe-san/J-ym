@@ -1,8 +1,6 @@
 package br.cefet.dao;
 
-import br.cefet.model.Atendente;
-import br.cefet.model.TipoContrato;
-import br.cefet.model.TipoTurno;
+import br.cefet.model.Exercicio;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -14,22 +12,22 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AtendenteDAO {
+public class ExercicioDAO {
     private String dbPath = "/home/felipe/Área de Trabalho/Feh/Antonio/Coisas de Java/J-ym/demo/src/main/java/br/cefet/db/db.csv";
 
-    public AtendenteDAO(){
+    public ExercicioDAO(){
 
     }
 
-    public List<Atendente> lerAtendentes(){
-        List<Atendente> atendentes = new ArrayList<>();
+    public List<Exercicio> lerExercicios(){
+        List<Exercicio> exercicios = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(dbPath))) {
             reader.readLine();
             String line;
             while ((line = reader.readLine()) != null){
                 String data[] = line.split(",");
-                if (data[0].contains("ATENDENTE")){
-                    atendentes.add(new Atendente(TipoTurno.valueOf(data[6]), Integer.parseInt(data[1]), data[3], Float.parseFloat(data[4]), data[2], data[5], data[7], TipoContrato.valueOf(data[8]), data[9], data[10], data[11]));
+                if (data[0].contains("EXERCICIO")){
+                    exercicios.add(new Exercicio(data[12], data[13], Integer.parseInt(data[14]), Integer.parseInt(data[15]), Float.parseFloat(data[16]), Integer.parseInt(data[17])));
                 }
             }
             
@@ -38,16 +36,16 @@ public class AtendenteDAO {
             e.printStackTrace();
         }
         
-        return atendentes;
+        return exercicios;
     }
 
-    public void criarAtendente(Atendente atendente){
+    public void criarExercicio(Exercicio exercicio){
 
         try {
             FileWriter writer = new FileWriter(dbPath, true);
-            writer.write("ATENDENTE" + "," + atendente.getMatricula() + "," + atendente.getNome() + "," + atendente.getGenero() + "," + atendente.getSalario() + "," + atendente.getSetor() + "," + atendente.getTurno() + "," + atendente.getDataNascimento() + "," + atendente.getTipoContrato() + "," + atendente.getStatus() + "," + atendente.getDataAdmissao() + "," + atendente.getCtps() + "," +  System.lineSeparator());
+            writer.write("EXERCICIO" + "," + "" + "," + "" + "," + "" + "," + "" + "," + "" + "," + "" + "," + "" + "," + "" + "," + "" + "," + "" + "," + "" + "," +  exercicio.getNome() + "," + exercicio.getLocal() + "," + exercicio.getSeries() + "," + exercicio.getRepeticoes() + "," + exercicio.getCarga() + "," + exercicio.getTempoDescanso());
             writer.close();
-            System.out.println("Salvando atendente " + atendente.getNome());
+            System.out.println("Salvando exercicio " + exercicio.getNome());
 
         } catch (IOException e){
             System.out.println("DAO deu merda...");
@@ -55,43 +53,57 @@ public class AtendenteDAO {
         }
     }
 
-    public void atualizarAtendente(Atendente atendente, int indiceBuscado){
+    public void atualizarExercicio(Exercicio exercicio, int indiceBuscado){
         try (BufferedReader reader = new BufferedReader(new FileReader(dbPath))) {
             reader.readLine();
             Path caminho = FileSystems.getDefault().getPath("/home/felipe/Área de Trabalho/Feh/Antonio/Coisas de Java/J-ym/demo/src/main/java/br/cefet/db/", "db.csv");
-            String atendenteAtualizado = "ATENDENTE" + "," + atendente.getMatricula() + "," + atendente.getNome() + "," + atendente.getGenero() + "," + atendente.getSalario() + "," + atendente.getSetor() + "," + atendente.getTurno() + "," + atendente.getDataNascimento() + "," + atendente.getTipoContrato() + "," + atendente.getStatus() + "," + atendente.getDataAdmissao() + "," + atendente.getCtps();
+            String exercicioAtualizado = "EXERCICIO" + "," + "" + "," + "" + "," + "" + "," + "" + "," + "" + "," + "" + "," + "" + "," + "" + "," + "" + "," + "" + "," + "" + "," +  exercicio.getNome() + "," + exercicio.getLocal() + "," + exercicio.getSeries() + "," + exercicio.getRepeticoes() + "," + exercicio.getCarga() + "," + exercicio.getTempoDescanso();
             List<String> linhas = Files.readAllLines(caminho);
             int indiceTrue = 1;
-            int numAtendentes = 0;
+            int numExercicios = 0;
 
             //definir indice para utilização no set
             for (String linha : linhas) {
-                if (linha.contains("ATENDENTE")){
-                    numAtendentes++;
+                if (linha.contains("EXERCICIO")){
+                    numExercicios++;
                 }
-                if (numAtendentes == indiceBuscado){
+                if (numExercicios == indiceBuscado){
                     break;
                 } 
                 indiceTrue++;
             }
             
-            linhas.set(indiceTrue, atendenteAtualizado);
+            linhas.set(indiceTrue, exercicioAtualizado);
             Files.write(caminho, linhas);
-            System.err.println("Atendente Atualizado");
+            System.err.println("Exercicio Atualizado");
         } catch (IOException e) {
             System.out.println("DAO deu merda...");
             e.printStackTrace();
         }
     }
 
-    public void destruirAtendente(int indiceBuscado){
+    public void destruirExercicio(int indiceBuscado){
         try (BufferedReader reader = new BufferedReader(new FileReader(dbPath))) {
             reader.readLine();
             Path caminho = FileSystems.getDefault().getPath("/home/felipe/Área de Trabalho/Feh/Antonio/Coisas de Java/J-ym/demo/src/main/java/br/cefet/db/", "db.csv");
             List<String> linhas = Files.readAllLines(caminho);
-            linhas.remove(indiceBuscado);
+            int indiceTrue = 1;
+            int numExercicios = 0;
+
+            //definir indice para utilização no set
+            for (String linha : linhas) {
+                if (linha.contains("EXERCICIO")){
+                    numExercicios++;
+                }
+                if (numExercicios == indiceBuscado){
+                    break;
+                } 
+                indiceTrue++;
+            }
+            
+            linhas.remove(indiceTrue);
             Files.write(caminho, linhas);
-            System.err.println("Atendente destruído");
+            System.out.println("Exercicio destruído");
         } catch (IOException e) {
             System.out.println("DAO deu merda...");
             e.printStackTrace();

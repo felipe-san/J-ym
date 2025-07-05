@@ -6,7 +6,16 @@ public class Exercicio {
     private int series;
     private int repeticoes;
     private float carga;
-    private float tempoDescanso;
+    private int tempoDescanso;
+
+    public Exercicio(String nome, String local, int series, int repeticoes, float carga, int tempoDescanso){
+        setCarga(carga);
+        setNome(nome);
+        setLocal(local);
+        setSeries(series);
+        setRepeticoes(repeticoes);
+        setTempoDescanso(tempoDescanso);
+    }
 
     public String getNome(){
         return nome;
@@ -52,7 +61,7 @@ public class Exercicio {
         this.carga = carga;
     }
 
-    public void setTempoDescanso(float tempoDescanso){
+    public void setTempoDescanso(int tempoDescanso){
         this.tempoDescanso = tempoDescanso;
     }
 }
