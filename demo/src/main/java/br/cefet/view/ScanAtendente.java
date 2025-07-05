@@ -1,7 +1,9 @@
 package br.cefet.view;
 
 import java.util.Scanner;
+import java.util.List;
 import br.cefet.controller.AtendenteController;
+import br.cefet.model.Atendente;
 import br.cefet.model.TipoContrato;
 import br.cefet.model.TipoTurno;
 
@@ -26,6 +28,8 @@ public class ScanAtendente {
                 criarAtendente();
                 break;
         
+            case "2":
+                lerAtendentes();
             default:
                 break;
         }
@@ -35,8 +39,6 @@ public class ScanAtendente {
     private void criarAtendente(){
         //Creating and initializating important attributes
         TipoTurno turno = TipoTurno.MANHA;
-
-        AtendenteController atendenteController = new AtendenteController();
         
         //Scanning nome
         System.out.printf("Digite o nome: ");
@@ -100,6 +102,24 @@ public class ScanAtendente {
     }
 
     private void lerAtendentes(){
-        
+        List<Atendente> atendentes = atendenteController.lerAtendentes();
+        int numeroAtendente = 1;
+
+        for (Atendente atendente : atendentes) {
+            System.out.println("\nAtendente nº " + numeroAtendente);
+            System.out.println("Matricula: " + atendente.getMatricula());
+            System.out.println("Nome: " + atendente.getNome());
+            System.out.println("Genero: " + atendente.getGenero());
+            System.out.println("Salario: R$" + atendente.getSalario());
+            System.out.println("Setor: " + atendente.getSetor());
+            System.out.println("Turno: " + atendente.getTurno());
+            System.out.println("Data Nascimento: " + atendente.getDataNascimento());
+            System.out.println("Tipo Contrato: " + atendente.getTipoContrato());
+            System.out.println("Status: " + atendente.getStatus());
+            System.out.println("Data Admissão: " + atendente.getDataAdmissao());
+            System.out.println("CTPS: " + atendente.getCtps());
+
+            numeroAtendente++;
+        }
     }
 }

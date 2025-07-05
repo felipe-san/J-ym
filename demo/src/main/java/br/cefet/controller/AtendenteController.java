@@ -14,6 +14,12 @@ public class AtendenteController {
         atendenteDAO = new AtendenteDAO();
     }
 
+    public List<Atendente> lerAtendentes(){
+        List<Atendente> atendentes = atendenteDAO.lerAtendentes();
+        return atendentes;
+    }
+
+
     public void criarAtendente(TipoTurno turno, int matricula, String genero, float salario, String nome, String setor, String dataNascimento, TipoContrato tipoContrato, String status, String dataAdmissao, String ctps){
         Atendente atendente = new Atendente(turno, matricula, genero, salario, nome, setor, dataNascimento, tipoContrato, status, dataAdmissao, ctps);
         atendenteDAO.criarAtendente(atendente);
