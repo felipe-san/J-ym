@@ -10,7 +10,20 @@ import br.cefet.model.TipoTurno;
 public class ScanAtendente {
     private final Scanner scanner = new Scanner(System.in);
     private final AtendenteController atendenteController;
+    private List<Atendente> atendentes;
     private String flag;
+    private TipoTurno turno;
+    private int matricula;
+    private String genero;
+    private float salario;
+    private String nome;
+    private String setor;
+    private String dataNascimento;
+    private TipoContrato tipoContrato;
+    private String status;
+    private String dataAdmissao;
+    private String ctps;
+
 
     public ScanAtendente(){
         atendenteController = new AtendenteController();
@@ -30,19 +43,27 @@ public class ScanAtendente {
         
             case "2":
                 lerAtendentes();
+                break;
+
+            case "3":
+                atualizarAtendente();
+                break;
+
             default:
+
+                System.out.println("Opção ainda não implementada.");
                 break;
         }
 
     }
 
-    private void criarAtendente(){
+    public void preencherAtendente(){
         //Creating and initializating important attributes
-        TipoTurno turno = TipoTurno.MANHA;
+        turno = TipoTurno.MANHA;
         
         //Scanning nome
         System.out.printf("Digite o nome: ");
-        String nome = scanner.nextLine();
+        nome = scanner.nextLine();
         
         //Scanning turno
         do{
@@ -56,23 +77,23 @@ public class ScanAtendente {
 
         //Scanning matricula
         System.out.printf("\nDigite a matrícula: ");
-        int matricula = Integer.parseInt(scanner.nextLine());
+        matricula = Integer.parseInt(scanner.nextLine());
 
         //Scanning genero
         System.out.printf("\nDigite o genero: ");
-        String genero = scanner.nextLine();
+        genero = scanner.nextLine();
 
         //Scanning salario
         System.out.printf("\nDigite o salário: ");
-        float salario = Float.parseFloat(scanner.nextLine());
+        salario = Float.parseFloat(scanner.nextLine());
 
         //Scanning setor
         System.out.printf("\nDigite o setor: ");
-        String setor = scanner.nextLine();
+        setor = scanner.nextLine();
 
         //Scanning dataNascimento
         System.out.printf("\nDigite a data de nascimento: ");
-        String dataNascimento = scanner.nextLine();
+        dataNascimento = scanner.nextLine();
 
         //Scanning tipoContrato
         do{
@@ -82,19 +103,23 @@ public class ScanAtendente {
             flag = atendenteController.checkFlag(flag, "123");
         } while (flag == "invalido");
 
-        TipoContrato tipoContrato = TipoContrato.values()[Integer.parseInt(flag) - 1];
+        tipoContrato = TipoContrato.values()[Integer.parseInt(flag) - 1];
 
         //Scanning status
         System.out.printf("\nDigite o status: ");
-        String status = scanner.nextLine();
+        status = scanner.nextLine();
 
         //Scanning dataAdmissao
         System.out.printf("\nDigite a data de admissão: ");
-        String dataAdmissao = scanner.nextLine();
+        dataAdmissao = scanner.nextLine();
 
         //Scanning ctps
         System.out.printf("\nDigite a CTPS: ");
-        String ctps = scanner.nextLine();
+        ctps = scanner.nextLine();
+    }
+
+    private void criarAtendente(){
+        preencherAtendente();
 
         //calling controller
         atendenteController.criarAtendente(turno, matricula, genero, salario, nome, setor, dataNascimento, tipoContrato, status, dataAdmissao, ctps);
@@ -102,7 +127,7 @@ public class ScanAtendente {
     }
 
     private void lerAtendentes(){
-        List<Atendente> atendentes = atendenteController.lerAtendentes();
+        atendentes = atendenteController.lerAtendentes();
         int numeroAtendente = 1;
 
         for (Atendente atendente : atendentes) {
@@ -121,5 +146,16 @@ public class ScanAtendente {
 
             numeroAtendente++;
         }
+    }
+
+    private void atualizarAtendente(){
+        if (atendentes == null){
+            lerAtendentes();
+        }
+
+        System.out.printf("\nQual atendente deseja editar? [1-%d] ", atendentes.size());
+        int indice = Integer.parseInt(scanner.nextLine());
+        preencherAtendente();
+        atendenteController.atualizarAtendente(indice, turno, matricula, genero, salario, nome, setor, dataNascimento, tipoContrato, status, dataAdmissao, ctps);
     }
 }

@@ -8,6 +8,9 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,5 +53,20 @@ public class AtendenteDAO {
         }
         
 
+    }
+
+    public void atualizarAtendente(Atendente atendente, int indiceBuscado){
+        try (BufferedReader reader = new BufferedReader(new FileReader(dbPath))) {
+            reader.readLine();
+            Path caminho = FileSystems.getDefault().getPath("/home/felipe/Área de Trabalho/Feh/Antonio/Coisas de Java/J-ym/demo/src/main/java/br/cefet/db/", "db.csv");
+            String atendenteAtualizado = atendente.getMatricula() + "," + atendente.getNome() + "," + atendente.getGenero() + "," + atendente.getSalario() + "," + atendente.getSetor() + "," + atendente.getTurno() + "," + atendente.getDataNascimento() + "," + atendente.getTipoContrato() + "," + atendente.getStatus() + "," + atendente.getDataAdmissao() + "," + atendente.getCtps();
+            List<String> linhas = Files.readAllLines(caminho);
+            linhas.set(indiceBuscado, atendenteAtualizado);
+            Files.write(caminho, linhas);
+            System.err.println("Atendente Atualizado");
+        } catch (IOException e) {
+            System.out.println("DAO deu merda...");
+            e.printStackTrace();
+        }
     }
 }

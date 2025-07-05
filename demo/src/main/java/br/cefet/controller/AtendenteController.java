@@ -25,6 +25,10 @@ public class AtendenteController {
         atendenteDAO.criarAtendente(atendente);
     }
 
+    public void atualizarAtendente(int indice, TipoTurno turno, int matricula, String genero, float salario, String nome, String setor, String dataNascimento, TipoContrato tipoContrato, String status, String dataAdmissao, String ctps){
+        Atendente atendente = new Atendente(turno, matricula, genero, salario, nome, setor, dataNascimento, tipoContrato, status, dataAdmissao, ctps);
+        atendenteDAO.atualizarAtendente(atendente, indice);
+    }
     public String checkFlag(String flag, String options){
         if (!options.contains(flag)){
             System.out.println("Opção inválida.");
