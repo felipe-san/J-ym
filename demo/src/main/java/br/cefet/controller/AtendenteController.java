@@ -29,6 +29,11 @@ public class AtendenteController {
         Atendente atendente = new Atendente(turno, matricula, genero, salario, nome, setor, dataNascimento, tipoContrato, status, dataAdmissao, ctps);
         atendenteDAO.atualizarAtendente(atendente, indice);
     }
+
+    public void destruirAtendente(int indice){
+        atendenteDAO.destruirAtendente(indice);
+    }
+
     public String checkFlag(String flag, String options){
         if (!options.contains(flag)){
             System.out.println("Opção inválida.");

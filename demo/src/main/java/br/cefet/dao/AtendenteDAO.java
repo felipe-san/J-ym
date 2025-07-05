@@ -69,4 +69,18 @@ public class AtendenteDAO {
             e.printStackTrace();
         }
     }
+
+    public void destruirAtendente(int indiceBuscado){
+        try (BufferedReader reader = new BufferedReader(new FileReader(dbPath))) {
+            reader.readLine();
+            Path caminho = FileSystems.getDefault().getPath("/home/felipe/Área de Trabalho/Feh/Antonio/Coisas de Java/J-ym/demo/src/main/java/br/cefet/db/", "db.csv");
+            List<String> linhas = Files.readAllLines(caminho);
+            linhas.remove(indiceBuscado);
+            Files.write(caminho, linhas);
+            System.err.println("Atendente destruído");
+        } catch (IOException e) {
+            System.out.println("DAO deu merda...");
+            e.printStackTrace();
+        }
+    }
 }

@@ -49,6 +49,10 @@ public class ScanAtendente {
                 atualizarAtendente();
                 break;
 
+            case "4":
+                destruirAtendente();
+                break;
+
             default:
 
                 System.out.println("Opção ainda não implementada.");
@@ -57,7 +61,7 @@ public class ScanAtendente {
 
     }
 
-    public void preencherAtendente(){
+    private void preencherAtendente(){
         //Creating and initializating important attributes
         turno = TipoTurno.MANHA;
         
@@ -148,14 +152,24 @@ public class ScanAtendente {
         }
     }
 
-    private void atualizarAtendente(){
+
+    private int previewAtendentesUpdateDestroy(String editarDestruir){
         if (atendentes == null){
             lerAtendentes();
         }
 
-        System.out.printf("\nQual atendente deseja editar? [1-%d] ", atendentes.size());
-        int indice = Integer.parseInt(scanner.nextLine());
+        System.out.printf("\nQual atendente deseja %s? [1-%d] ", editarDestruir, atendentes.size());
+        return Integer.parseInt(scanner.nextLine());
+    }
+    private void atualizarAtendente(){
+        
+        int indice = previewAtendentesUpdateDestroy("editar");
         preencherAtendente();
         atendenteController.atualizarAtendente(indice, turno, matricula, genero, salario, nome, setor, dataNascimento, tipoContrato, status, dataAdmissao, ctps);
+    }
+
+    private void destruirAtendente(){
+        int indice = previewAtendentesUpdateDestroy("destruir");
+        atendenteController.destruirAtendente(indice);
     }
 }
