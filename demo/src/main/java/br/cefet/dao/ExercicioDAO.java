@@ -43,7 +43,7 @@ public class ExercicioDAO {
 
         try {
             FileWriter writer = new FileWriter(dbPath, true);
-            writer.write("EXERCICIO" + "," + "" + "," + "" + "," + "" + "," + "" + "," + "" + "," + "" + "," + "" + "," + "" + "," + "" + "," + "" + "," + "" + "," +  exercicio.getNome() + "," + exercicio.getLocal() + "," + exercicio.getSeries() + "," + exercicio.getRepeticoes() + "," + exercicio.getCarga() + "," + exercicio.getTempoDescanso());
+            writer.write("EXERCICIO" + "," + "" + "," + "" + "," + "" + "," + "" + "," + "" + "," + "" + "," + "" + "," + "" + "," + "" + "," + "" + "," + "" + "," +  exercicio.getNome() + "," + exercicio.getLocal() + "," + exercicio.getSeries() + "," + exercicio.getRepeticoes() + "," + exercicio.getCarga() + "," + exercicio.getTempoDescanso() + "," + System.lineSeparator());
             writer.close();
             System.out.println("Salvando exercicio " + exercicio.getNome());
 
@@ -67,13 +67,16 @@ public class ExercicioDAO {
                 if (linha.contains("EXERCICIO")){
                     numExercicios++;
                 }
+                
                 if (numExercicios == indiceBuscado){
                     break;
-                } 
+                }
+                
                 indiceTrue++;
+
             }
             
-            linhas.set(indiceTrue, exercicioAtualizado);
+            linhas.set(indiceTrue - 1, exercicioAtualizado);
             Files.write(caminho, linhas);
             System.err.println("Exercicio Atualizado");
         } catch (IOException e) {
@@ -92,16 +95,22 @@ public class ExercicioDAO {
 
             //definir indice para utilização no set
             for (String linha : linhas) {
+                
                 if (linha.contains("EXERCICIO")){
                     numExercicios++;
                 }
+                
                 if (numExercicios == indiceBuscado){
                     break;
-                } 
+                }
+
+                System.out.println("\n" + linha);
+                System.out.println("Quantidade de exercicios: " + numExercicios + " - indice: " + indiceTrue);
+
                 indiceTrue++;
             }
             
-            linhas.remove(indiceTrue);
+            linhas.remove(indiceTrue - 1);
             Files.write(caminho, linhas);
             System.out.println("Exercicio destruído");
         } catch (IOException e) {

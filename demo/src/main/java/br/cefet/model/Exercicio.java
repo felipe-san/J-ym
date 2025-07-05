@@ -37,7 +37,7 @@ public class Exercicio {
         return carga;
     }
 
-    public float getTempoDescanso(){
+    public int getTempoDescanso(){
         return tempoDescanso;
     }
 

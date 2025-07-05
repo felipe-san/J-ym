@@ -69,13 +69,17 @@ public class AtendenteDAO {
                 if (linha.contains("ATENDENTE")){
                     numAtendentes++;
                 }
+                
                 if (numAtendentes == indiceBuscado){
                     break;
                 } 
+                
+                
+                
                 indiceTrue++;
             }
-            
-            linhas.set(indiceTrue, atendenteAtualizado);
+
+            linhas.set(indiceTrue - 1, atendenteAtualizado);
             Files.write(caminho, linhas);
             System.err.println("Atendente Atualizado");
         } catch (IOException e) {
@@ -89,7 +93,24 @@ public class AtendenteDAO {
             reader.readLine();
             Path caminho = FileSystems.getDefault().getPath("/home/felipe/Área de Trabalho/Feh/Antonio/Coisas de Java/J-ym/demo/src/main/java/br/cefet/db/", "db.csv");
             List<String> linhas = Files.readAllLines(caminho);
-            linhas.remove(indiceBuscado);
+            int indiceTrue = 1;
+            int numAtendentes = 0;
+            System.out.println("Indice buscado: " + indiceBuscado);
+            
+            //definir indice para utilização no set
+            for (String linha : linhas) {
+                if (linha.contains("ATENDENTE")){
+                    numAtendentes++;
+                }
+
+                if (numAtendentes == indiceBuscado){
+                    break;
+                } 
+                
+                indiceTrue++;
+            }
+            
+            linhas.remove(indiceTrue - 1);
             Files.write(caminho, linhas);
             System.err.println("Atendente destruído");
         } catch (IOException e) {
