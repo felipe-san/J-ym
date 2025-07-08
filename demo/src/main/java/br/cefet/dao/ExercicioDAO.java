@@ -6,6 +6,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.File;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -13,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ExercicioDAO {
-    private String dbPath = "/home/felipe/Área de Trabalho/Feh/Antonio/Coisas de Java/J-ym/demo/src/main/java/br/cefet/db/db.csv";
+    private String dbPath = FileSystems.getDefault().getPath("").toAbsolutePath().toString().concat("/demo/src/main/java/br/cefet/db/db.csv");
 
     public ExercicioDAO(){
 
@@ -56,7 +57,7 @@ public class ExercicioDAO {
     public void atualizarExercicio(Exercicio exercicio, int indiceBuscado){
         try (BufferedReader reader = new BufferedReader(new FileReader(dbPath))) {
             reader.readLine();
-            Path caminho = FileSystems.getDefault().getPath("/home/felipe/Área de Trabalho/Feh/Antonio/Coisas de Java/J-ym/demo/src/main/java/br/cefet/db/", "db.csv");
+            Path caminho = FileSystems.getDefault().getPath(new File("").getAbsolutePath().concat("/db/"), "db.csv");
             String exercicioAtualizado = "EXERCICIO" + "," + "" + "," + "" + "," + "" + "," + "" + "," + "" + "," + "" + "," + "" + "," + "" + "," + "" + "," + "" + "," + "" + "," +  exercicio.getNome() + "," + exercicio.getLocal() + "," + exercicio.getSeries() + "," + exercicio.getRepeticoes() + "," + exercicio.getCarga() + "," + exercicio.getTempoDescanso();
             List<String> linhas = Files.readAllLines(caminho);
             int indiceTrue = 1;
@@ -78,7 +79,7 @@ public class ExercicioDAO {
             
             linhas.set(indiceTrue - 1, exercicioAtualizado);
             Files.write(caminho, linhas);
-            System.err.println("Exercicio Atualizado");
+            System.err.println("Exercicio " + exercicio.getNome() + " atualizado");
         } catch (IOException e) {
             System.out.println("DAO deu merda...");
             e.printStackTrace();
@@ -88,7 +89,7 @@ public class ExercicioDAO {
     public void destruirExercicio(int indiceBuscado){
         try (BufferedReader reader = new BufferedReader(new FileReader(dbPath))) {
             reader.readLine();
-            Path caminho = FileSystems.getDefault().getPath("/home/felipe/Área de Trabalho/Feh/Antonio/Coisas de Java/J-ym/demo/src/main/java/br/cefet/db/", "db.csv");
+            Path caminho = FileSystems.getDefault().getPath(new File("").getAbsolutePath().concat("/db/"), "db.csv");
             List<String> linhas = Files.readAllLines(caminho);
             int indiceTrue = 1;
             int numExercicios = 0;
@@ -103,9 +104,6 @@ public class ExercicioDAO {
                 if (numExercicios == indiceBuscado){
                     break;
                 }
-
-                System.out.println("\n" + linha);
-                System.out.println("Quantidade de exercicios: " + numExercicios + " - indice: " + indiceTrue);
 
                 indiceTrue++;
             }

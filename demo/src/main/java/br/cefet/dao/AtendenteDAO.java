@@ -13,10 +13,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.File;
 
 public class AtendenteDAO {
-    private String dbPath = "/home/felipe/Área de Trabalho/Feh/Antonio/Coisas de Java/J-ym/demo/src/main/java/br/cefet/db/db.csv";
-
+    private String dbPath = FileSystems.getDefault().getPath("").toAbsolutePath().toString().concat("/demo/src/main/java/br/cefet/db/db.csv");
     public AtendenteDAO(){
 
     }
@@ -58,7 +58,7 @@ public class AtendenteDAO {
     public void atualizarAtendente(Atendente atendente, int indiceBuscado){
         try (BufferedReader reader = new BufferedReader(new FileReader(dbPath))) {
             reader.readLine();
-            Path caminho = FileSystems.getDefault().getPath("/home/felipe/Área de Trabalho/Feh/Antonio/Coisas de Java/J-ym/demo/src/main/java/br/cefet/db/", "db.csv");
+            Path caminho = FileSystems.getDefault().getPath(new File("").getAbsolutePath().concat("/db/"), "db.csv");
             String atendenteAtualizado = "ATENDENTE" + "," + atendente.getMatricula() + "," + atendente.getNome() + "," + atendente.getGenero() + "," + atendente.getSalario() + "," + atendente.getSetor() + "," + atendente.getTurno() + "," + atendente.getDataNascimento() + "," + atendente.getTipoContrato() + "," + atendente.getStatus() + "," + atendente.getDataAdmissao() + "," + atendente.getCtps();
             List<String> linhas = Files.readAllLines(caminho);
             int indiceTrue = 1;
@@ -73,15 +73,13 @@ public class AtendenteDAO {
                 if (numAtendentes == indiceBuscado){
                     break;
                 } 
-                
-                
-                
+
                 indiceTrue++;
             }
 
             linhas.set(indiceTrue - 1, atendenteAtualizado);
             Files.write(caminho, linhas);
-            System.err.println("Atendente Atualizado");
+            System.out.println("Atendente " + atendente.getNome() + " atualizado");
         } catch (IOException e) {
             System.out.println("DAO deu merda...");
             e.printStackTrace();
@@ -91,11 +89,10 @@ public class AtendenteDAO {
     public void destruirAtendente(int indiceBuscado){
         try (BufferedReader reader = new BufferedReader(new FileReader(dbPath))) {
             reader.readLine();
-            Path caminho = FileSystems.getDefault().getPath("/home/felipe/Área de Trabalho/Feh/Antonio/Coisas de Java/J-ym/demo/src/main/java/br/cefet/db/", "db.csv");
+            Path caminho = FileSystems.getDefault().getPath(new File("").getAbsolutePath().concat("/db/"), "db.csv");
             List<String> linhas = Files.readAllLines(caminho);
             int indiceTrue = 1;
             int numAtendentes = 0;
-            System.out.println("Indice buscado: " + indiceBuscado);
             
             //definir indice para utilização no set
             for (String linha : linhas) {
@@ -112,7 +109,7 @@ public class AtendenteDAO {
             
             linhas.remove(indiceTrue - 1);
             Files.write(caminho, linhas);
-            System.err.println("Atendente destruído");
+            System.out.println("Atendente destruído");
         } catch (IOException e) {
             System.out.println("DAO deu merda...");
             e.printStackTrace();
