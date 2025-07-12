@@ -57,7 +57,7 @@ public class ExercicioDAO {
     public void atualizarExercicio(Exercicio exercicio, int indiceBuscado){
         try (BufferedReader reader = new BufferedReader(new FileReader(dbPath))) {
             reader.readLine();
-            Path caminho = FileSystems.getDefault().getPath(new File("").getAbsolutePath().concat("/db/"), "db.csv");
+            Path caminho = FileSystems.getDefault().getPath(new File("").getAbsolutePath().concat("/demo/src/main/java/br/cefet/db/"), "db.csv");
             String exercicioAtualizado = "EXERCICIO" + "," + "" + "," + "" + "," + "" + "," + "" + "," + "" + "," + "" + "," + "" + "," + "" + "," + "" + "," + "" + "," + "" + "," +  exercicio.getNome() + "," + exercicio.getLocal() + "," + exercicio.getSeries() + "," + exercicio.getRepeticoes() + "," + exercicio.getCarga() + "," + exercicio.getTempoDescanso();
             List<String> linhas = Files.readAllLines(caminho);
             int indiceTrue = 1;
@@ -89,7 +89,7 @@ public class ExercicioDAO {
     public void destruirExercicio(int indiceBuscado){
         try (BufferedReader reader = new BufferedReader(new FileReader(dbPath))) {
             reader.readLine();
-            Path caminho = FileSystems.getDefault().getPath(new File("").getAbsolutePath().concat("/db/"), "db.csv");
+            Path caminho = FileSystems.getDefault().getPath(new File("").getAbsolutePath().concat("/demo/src/main/java/br/cefet/db/"), "db.csv");
             List<String> linhas = Files.readAllLines(caminho);
             int indiceTrue = 1;
             int numExercicios = 0;

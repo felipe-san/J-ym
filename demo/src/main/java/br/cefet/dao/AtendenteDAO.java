@@ -58,7 +58,7 @@ public class AtendenteDAO {
     public void atualizarAtendente(Atendente atendente, int indiceBuscado){
         try (BufferedReader reader = new BufferedReader(new FileReader(dbPath))) {
             reader.readLine();
-            Path caminho = FileSystems.getDefault().getPath(new File("").getAbsolutePath().concat("/db/"), "db.csv");
+            Path caminho = FileSystems.getDefault().getPath(new File("").getAbsolutePath().concat("/demo/src/main/java/br/cefet/db/"), "db.csv");
             String atendenteAtualizado = "ATENDENTE" + "," + atendente.getMatricula() + "," + atendente.getNome() + "," + atendente.getGenero() + "," + atendente.getSalario() + "," + atendente.getSetor() + "," + atendente.getTurno() + "," + atendente.getDataNascimento() + "," + atendente.getTipoContrato() + "," + atendente.getStatus() + "," + atendente.getDataAdmissao() + "," + atendente.getCtps();
             List<String> linhas = Files.readAllLines(caminho);
             int indiceTrue = 1;
@@ -89,7 +89,7 @@ public class AtendenteDAO {
     public void destruirAtendente(int indiceBuscado){
         try (BufferedReader reader = new BufferedReader(new FileReader(dbPath))) {
             reader.readLine();
-            Path caminho = FileSystems.getDefault().getPath(new File("").getAbsolutePath().concat("/db/"), "db.csv");
+            Path caminho = FileSystems.getDefault().getPath(new File("").getAbsolutePath().concat("/demo/src/main/java/br/cefet/db/"), "db.csv");
             List<String> linhas = Files.readAllLines(caminho);
             int indiceTrue = 1;
             int numAtendentes = 0;
