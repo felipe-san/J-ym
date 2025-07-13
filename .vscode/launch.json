@@ -16,6 +16,16 @@
             "request": "launch",
             "mainClass": "br.cefet.Main",
             "projectName": "demo"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-MyApp<demo>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "br.cefet.MyApp",
+            "projectName": "demo",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
         }
     ]
 }
