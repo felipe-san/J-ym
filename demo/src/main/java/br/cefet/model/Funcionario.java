@@ -7,6 +7,10 @@ public class Funcionario extends Pessoa {
     private String dataAdmissao;  
     private String ctps;
 
+    public Funcionario() {
+        super();
+    }
+
     public Funcionario(int matricula, String genero, float salario, String nome, String setor, String dataNascimento, TipoContrato tipoContrato, String status, String dataAdmissao, String ctps){
         super(nome, matricula, dataNascimento, genero);
         setCtps(ctps);

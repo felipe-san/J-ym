@@ -8,6 +8,9 @@ public class Exercicio {
     private float carga;
     private int tempoDescanso;
 
+    public Exercicio() {
+    }
+
     public Exercicio(String nome, String local, int series, int repeticoes, float carga, int tempoDescanso){
         setCarga(carga);
         setNome(nome);

@@ -10,11 +10,12 @@ import java.io.File;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ExercicioDAO {
-    private String dbPath = FileSystems.getDefault().getPath("").toAbsolutePath().toString().concat("/demo/src/main/java/br/cefet/db/db.csv");
+    private String dbPath = Paths.get("src/main/java/br/cefet/db/db.csv").toAbsolutePath().toString();
 
     public ExercicioDAO(){
 

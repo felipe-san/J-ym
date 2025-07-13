@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Novo Exercício</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h2 th:text="${#strings.isEmpty(indice) ? 'Novo Exercício' : 'Editar Exercício'}"></h2>
+    <form th:action="${#strings.isEmpty(indice) ? '/exercicios/criar' : '/exercicios/editar/' + indice}" method="post">
+        <div class="mb-3">
+            <label for="nome" class="form-label">Nome</label>
+            <input type="text" class="form-control" id="nome" name="nome" th:value="${exercicio.nome}" required>
+        </div>
+        <div class="mb-3">
+            <label for="local" class="form-label">Local</label>
+            <input type="text" class="form-control" id="local" name="local" th:value="${exercicio.local}" required>
+        </div>
+        <div class="mb-3">
+            <label for="series" class="form-label">Séries</label>
+            <input type="number" class="form-control" id="series" name="series" th:value="${exercicio.series}" required>
+        </div>
+        <div class="mb-3">
+            <label for="repeticoes" class="form-label">Repetições</label>
+            <input type="number" class="form-control" id="repeticoes" name="repeticoes" th:value="${exercicio.repeticoes}" required>
+        </div>
+        <div class="mb-3">
+            <label for="carga" class="form-label">Carga</label>
+            <input type="number" step="0.01" class="form-control" id="carga" name="carga" th:value="${exercicio.carga}" required>
+        </div>
+        <div class="mb-3">
+            <label for="tempoDescanso" class="form-label">Tempo Descanso</label>
+            <input type="number" class="form-control" id="tempoDescanso" name="tempoDescanso" th:value="${exercicio.tempoDescanso}" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Salvar</button>
+        <a th:href="@{/exercicios}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+</body>
+</html>

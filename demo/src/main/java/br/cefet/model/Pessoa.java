@@ -11,7 +11,12 @@ public abstract class Pessoa {
     private List<Contato> contatos;
     private Endereco endereco;
     private List<Documento> documentos;
-    
+
+    public Pessoa() {
+        documentos = new ArrayList<>();
+        contatos = new ArrayList<>();
+    }
+
     public Pessoa(String nome, int matricula, String dataNascimento, String genero){
         documentos = new ArrayList<>();
         contatos = new ArrayList<>();

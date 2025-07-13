@@ -8,15 +8,15 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.io.File;
 
 public class AtendenteDAO {
-    private String dbPath = FileSystems.getDefault().getPath("").toAbsolutePath().toString().concat("/demo/src/main/java/br/cefet/db/db.csv");
+    private String dbPath = Paths.get("src/main/java/br/cefet/db/db.csv").toAbsolutePath().toString();
     public AtendenteDAO(){
 
     }
@@ -58,7 +58,7 @@ public class AtendenteDAO {
     public void atualizarAtendente(Atendente atendente, int indiceBuscado){
         try (BufferedReader reader = new BufferedReader(new FileReader(dbPath))) {
             reader.readLine();
-            Path caminho = FileSystems.getDefault().getPath(new File("").getAbsolutePath().concat("/demo/src/main/java/br/cefet/db/"), "db.csv");
+            Path caminho = Paths.get(dbPath);
             String atendenteAtualizado = "ATENDENTE" + "," + atendente.getMatricula() + "," + atendente.getNome() + "," + atendente.getGenero() + "," + atendente.getSalario() + "," + atendente.getSetor() + "," + atendente.getTurno() + "," + atendente.getDataNascimento() + "," + atendente.getTipoContrato() + "," + atendente.getStatus() + "," + atendente.getDataAdmissao() + "," + atendente.getCtps();
             List<String> linhas = Files.readAllLines(caminho);
             int indiceTrue = 1;
@@ -69,11 +69,9 @@ public class AtendenteDAO {
                 if (linha.contains("ATENDENTE")){
                     numAtendentes++;
                 }
-                
                 if (numAtendentes == indiceBuscado){
                     break;
-                } 
-
+                }
                 indiceTrue++;
             }
 
@@ -89,24 +87,20 @@ public class AtendenteDAO {
     public void destruirAtendente(int indiceBuscado){
         try (BufferedReader reader = new BufferedReader(new FileReader(dbPath))) {
             reader.readLine();
-            Path caminho = FileSystems.getDefault().getPath(new File("").getAbsolutePath().concat("/demo/src/main/java/br/cefet/db/"), "db.csv");
+            Path caminho = Paths.get(dbPath);
             List<String> linhas = Files.readAllLines(caminho);
             int indiceTrue = 1;
             int numAtendentes = 0;
-            
             //definir indice para utilização no set
             for (String linha : linhas) {
                 if (linha.contains("ATENDENTE")){
                     numAtendentes++;
                 }
-
                 if (numAtendentes == indiceBuscado){
                     break;
-                } 
-                
+                }
                 indiceTrue++;
             }
-            
             linhas.remove(indiceTrue - 1);
             Files.write(caminho, linhas);
             System.out.println("Atendente destruído");
