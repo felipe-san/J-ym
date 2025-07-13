@@ -29,15 +29,19 @@ public class AtendenteDAO {
             while ((line = reader.readLine()) != null){
                 String data[] = line.split(",");
                 if (data[0].contains("ATENDENTE")){
-                    atendentes.add(new Atendente(TipoTurno.valueOf(data[6]), Integer.parseInt(data[1]), data[3], Float.parseFloat(data[4]), data[2], data[5], data[7], TipoContrato.valueOf(data[8]), data[9], data[10], data[11]));
+                    TipoTurno turno = null;
+                    try {
+                        turno = TipoTurno.valueOf(data[6].toUpperCase());
+                    } catch (Exception e) {
+                        // Se não for um valor válido, deixa como null
+                    }
+                    atendentes.add(new Atendente(turno, Integer.parseInt(data[1]), data[3], Float.parseFloat(data[4]), data[2], data[5], data[7], TipoContrato.valueOf(data[8]), data[9], data[10], data[11]));
                 }
             }
-            
         } catch (IOException e) {
             System.out.println("DAO deu merda...");
             e.printStackTrace();
         }
-        
         return atendentes;
     }
 
@@ -45,7 +49,7 @@ public class AtendenteDAO {
 
         try {
             FileWriter writer = new FileWriter(dbPath, true);
-            writer.write("ATENDENTE" + "," + atendente.getMatricula() + "," + atendente.getNome() + "," + atendente.getGenero() + "," + atendente.getSalario() + "," + atendente.getSetor() + "," + atendente.getTurno() + "," + atendente.getDataNascimento() + "," + atendente.getTipoContrato() + "," + atendente.getStatus() + "," + atendente.getDataAdmissao() + "," + atendente.getCtps() + "," +  System.lineSeparator());
+            writer.write("ATENDENTE" + "," + atendente.getMatricula() + "," + atendente.getNome() + "," + atendente.getGenero() + "," + atendente.getSalario() + "," + atendente.getSetor() + "," + (atendente.getTurno() != null ? atendente.getTurno().getTurno() : "") + "," + formatarData(atendente.getDataNascimento()) + "," + atendente.getTipoContrato() + "," + atendente.getStatus() + "," + formatarData(atendente.getDataAdmissao()) + "," + atendente.getCtps() + "," +  System.lineSeparator());
             writer.close();
             System.out.println("Salvando atendente " + atendente.getNome());
 
@@ -55,29 +59,36 @@ public class AtendenteDAO {
         }
     }
 
+    private String formatarData(String data) {
+        if (data == null || data.isEmpty()) return "";
+        // Aceita yyyy-MM-dd ou dd/MM/yyyy e converte para dd/MM/yyyy
+        if (data.matches("\\d{4}-\\d{2}-\\d{2}")) {
+            String[] parts = data.split("-");
+            return parts[2] + "/" + parts[1] + "/" + parts[0];
+        }
+        return data;
+    }
+
     public void atualizarAtendente(Atendente atendente, int indiceBuscado){
-        try (BufferedReader reader = new BufferedReader(new FileReader(dbPath))) {
-            reader.readLine();
+        try {
             Path caminho = Paths.get(dbPath);
-            String atendenteAtualizado = "ATENDENTE" + "," + atendente.getMatricula() + "," + atendente.getNome() + "," + atendente.getGenero() + "," + atendente.getSalario() + "," + atendente.getSetor() + "," + atendente.getTurno() + "," + atendente.getDataNascimento() + "," + atendente.getTipoContrato() + "," + atendente.getStatus() + "," + atendente.getDataAdmissao() + "," + atendente.getCtps();
             List<String> linhas = Files.readAllLines(caminho);
-            int indiceTrue = 1;
-            int numAtendentes = 0;
-
-            //definir indice para utilização no set
-            for (String linha : linhas) {
-                if (linha.contains("ATENDENTE")){
-                    numAtendentes++;
+            int atendenteIndex = -1;
+            for (int i = 0, count = 0; i < linhas.size(); i++) {
+                if (linhas.get(i).startsWith("ATENDENTE")) {
+                    if (count == indiceBuscado) {
+                        atendenteIndex = i;
+                        break;
+                    }
+                    count++;
                 }
-                if (numAtendentes == indiceBuscado){
-                    break;
-                }
-                indiceTrue++;
             }
-
-            linhas.set(indiceTrue - 1, atendenteAtualizado);
-            Files.write(caminho, linhas);
-            System.out.println("Atendente " + atendente.getNome() + " atualizado");
+            if (atendenteIndex != -1) {
+                String atendenteAtualizado = "ATENDENTE" + "," + atendente.getMatricula() + "," + atendente.getNome() + "," + atendente.getGenero() + "," + atendente.getSalario() + "," + atendente.getSetor() + "," + (atendente.getTurno() != null ? atendente.getTurno().getTurno() : "") + "," + formatarData(atendente.getDataNascimento()) + "," + atendente.getTipoContrato() + "," + atendente.getStatus() + "," + formatarData(atendente.getDataAdmissao()) + "," + atendente.getCtps();
+                linhas.set(atendenteIndex, atendenteAtualizado);
+                Files.write(caminho, linhas);
+                System.out.println("Atendente " + atendente.getNome() + " atualizado");
+            }
         } catch (IOException e) {
             System.out.println("DAO deu merda...");
             e.printStackTrace();
@@ -85,25 +96,24 @@ public class AtendenteDAO {
     }
 
     public void destruirAtendente(int indiceBuscado){
-        try (BufferedReader reader = new BufferedReader(new FileReader(dbPath))) {
-            reader.readLine();
+        try {
             Path caminho = Paths.get(dbPath);
             List<String> linhas = Files.readAllLines(caminho);
-            int indiceTrue = 1;
-            int numAtendentes = 0;
-            //definir indice para utilização no set
-            for (String linha : linhas) {
-                if (linha.contains("ATENDENTE")){
-                    numAtendentes++;
+            int atendenteIndex = -1;
+            for (int i = 0, count = 0; i < linhas.size(); i++) {
+                if (linhas.get(i).startsWith("ATENDENTE")) {
+                    if (count == indiceBuscado) {
+                        atendenteIndex = i;
+                        break;
+                    }
+                    count++;
                 }
-                if (numAtendentes == indiceBuscado){
-                    break;
-                }
-                indiceTrue++;
             }
-            linhas.remove(indiceTrue - 1);
-            Files.write(caminho, linhas);
-            System.out.println("Atendente destruído");
+            if (atendenteIndex != -1) {
+                linhas.remove(atendenteIndex);
+                Files.write(caminho, linhas);
+                System.out.println("Atendente destruído");
+            }
         } catch (IOException e) {
             System.out.println("DAO deu merda...");
             e.printStackTrace();

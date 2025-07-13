@@ -56,31 +56,25 @@ public class ExercicioDAO {
     }
 
     public void atualizarExercicio(Exercicio exercicio, int indiceBuscado){
-        try (BufferedReader reader = new BufferedReader(new FileReader(dbPath))) {
-            reader.readLine();
-            Path caminho = FileSystems.getDefault().getPath(new File("").getAbsolutePath().concat("/demo/src/main/java/br/cefet/db/"), "db.csv");
-            String exercicioAtualizado = "EXERCICIO" + "," + "" + "," + "" + "," + "" + "," + "" + "," + "" + "," + "" + "," + "" + "," + "" + "," + "" + "," + "" + "," + "" + "," +  exercicio.getNome() + "," + exercicio.getLocal() + "," + exercicio.getSeries() + "," + exercicio.getRepeticoes() + "," + exercicio.getCarga() + "," + exercicio.getTempoDescanso();
+        try {
+            Path caminho = Paths.get(dbPath);
             List<String> linhas = Files.readAllLines(caminho);
-            int indiceTrue = 1;
-            int numExercicios = 0;
-
-            //definir indice para utilização no set
-            for (String linha : linhas) {
-                if (linha.contains("EXERCICIO")){
-                    numExercicios++;
+            int exercicioIndex = -1;
+            for (int i = 0, count = 0; i < linhas.size(); i++) {
+                if (linhas.get(i).startsWith("EXERCICIO")) {
+                    if (count == indiceBuscado) {
+                        exercicioIndex = i;
+                        break;
+                    }
+                    count++;
                 }
-                
-                if (numExercicios == indiceBuscado){
-                    break;
-                }
-                
-                indiceTrue++;
-
             }
-            
-            linhas.set(indiceTrue - 1, exercicioAtualizado);
-            Files.write(caminho, linhas);
-            System.err.println("Exercicio " + exercicio.getNome() + " atualizado");
+            if (exercicioIndex != -1) {
+                String exercicioAtualizado = "EXERCICIO" + "," + "" + "," + "" + "," + "" + "," + "" + "," + "" + "," + "" + "," + "" + "," + "" + "," + "" + "," + "" + "," + "" + "," +  exercicio.getNome() + "," + exercicio.getLocal() + "," + exercicio.getSeries() + "," + exercicio.getRepeticoes() + "," + exercicio.getCarga() + "," + exercicio.getTempoDescanso();
+                linhas.set(exercicioIndex, exercicioAtualizado);
+                Files.write(caminho, linhas);
+                System.err.println("Exercicio " + exercicio.getNome() + " atualizado");
+            }
         } catch (IOException e) {
             System.out.println("DAO deu merda...");
             e.printStackTrace();
@@ -88,30 +82,24 @@ public class ExercicioDAO {
     }
 
     public void destruirExercicio(int indiceBuscado){
-        try (BufferedReader reader = new BufferedReader(new FileReader(dbPath))) {
-            reader.readLine();
-            Path caminho = FileSystems.getDefault().getPath(new File("").getAbsolutePath().concat("/demo/src/main/java/br/cefet/db/"), "db.csv");
+        try {
+            Path caminho = Paths.get(dbPath);
             List<String> linhas = Files.readAllLines(caminho);
-            int indiceTrue = 1;
-            int numExercicios = 0;
-
-            //definir indice para utilização no set
-            for (String linha : linhas) {
-                
-                if (linha.contains("EXERCICIO")){
-                    numExercicios++;
+            int exercicioIndex = -1;
+            for (int i = 0, count = 0; i < linhas.size(); i++) {
+                if (linhas.get(i).startsWith("EXERCICIO")) {
+                    if (count == indiceBuscado) {
+                        exercicioIndex = i;
+                        break;
+                    }
+                    count++;
                 }
-                
-                if (numExercicios == indiceBuscado){
-                    break;
-                }
-
-                indiceTrue++;
             }
-            
-            linhas.remove(indiceTrue - 1);
-            Files.write(caminho, linhas);
-            System.out.println("Exercicio destruído");
+            if (exercicioIndex != -1) {
+                linhas.remove(exercicioIndex);
+                Files.write(caminho, linhas);
+                System.out.println("Exercicio destruído");
+            }
         } catch (IOException e) {
             System.out.println("DAO deu merda...");
             e.printStackTrace();

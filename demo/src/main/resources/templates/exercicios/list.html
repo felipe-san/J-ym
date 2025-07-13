@@ -35,10 +35,12 @@
             <td th:text="${exercicio.carga}"></td>
             <td th:text="${exercicio.tempoDescanso}"></td>
             <td>
-                <a th:href="@{'/exercicios/editar/' + ${iterStat.index}}" class="btn btn-primary btn-sm">Editar</a>
-                <form th:action="@{'/exercicios/deletar/' + ${iterStat.index}}" method="post" style="display:inline;">
-                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Tem certeza que deseja deletar?');">Deletar</button>
-                </form>
+                <div class="d-flex gap-1">
+                    <a th:href="@{'/exercicios/editar/' + ${iterStat.index}}" class="btn btn-primary btn-sm flex-fill" style="min-width: 80px;">Editar</a>
+                    <form th:action="@{'/exercicios/deletar/' + ${iterStat.index}}" method="post" style="display:inline; width:100%;">
+                        <button type="submit" class="btn btn-danger btn-sm flex-fill" style="min-width: 80px;" onclick="return confirm('Tem certeza que deseja deletar?');">Deletar</button>
+                    </form>
+                </div>
             </td>
         </tr>
         </tbody>

@@ -38,17 +38,19 @@
             <td th:text="${atendente.genero}"></td>
             <td th:text="${atendente.salario}"></td>
             <td th:text="${atendente.setor}"></td>
-            <td th:text="${atendente.turno}"></td>
-            <td th:text="${atendente.dataNascimento}"></td>
-            <td th:text="${atendente.tipoContrato}"></td>
+            <td th:text="${atendente.turno != null ? atendente.turno.turno : ''}"></td>
+            <td th:text="${atendente.dataNascimento != null && atendente.dataNascimento.matches('\\d{4}-\\d{2}-\\d{2}') ? (atendente.dataNascimento.substring(8,10) + '/' + atendente.dataNascimento.substring(5,7) + '/' + atendente.dataNascimento.substring(0,4)) : atendente.dataNascimento}"></td>
+            <td th:text="${atendente.tipoContrato != null ? atendente.tipoContrato.contrato : ''}"></td>
             <td th:text="${atendente.status}"></td>
-            <td th:text="${atendente.dataAdmissao}"></td>
+            <td th:text="${atendente.dataAdmissao != null && atendente.dataAdmissao.matches('\\d{4}-\\d{2}-\\d{2}') ? (atendente.dataAdmissao.substring(8,10) + '/' + atendente.dataAdmissao.substring(5,7) + '/' + atendente.dataAdmissao.substring(0,4)) : atendente.dataAdmissao}"></td>
             <td th:text="${atendente.ctps}"></td>
             <td>
-                <a th:href="@{'/atendentes/editar/' + ${iterStat.index}}" class="btn btn-primary btn-sm">Editar</a>
-                <form th:action="@{'/atendentes/deletar/' + ${iterStat.index}}" method="post" style="display:inline;">
-                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Tem certeza que deseja deletar?');">Deletar</button>
-                </form>
+                <div class="d-flex gap-1">
+                    <a th:href="@{'/atendentes/editar/' + ${iterStat.index}}" class="btn btn-primary btn-sm flex-fill" style="min-width: 80px;">Editar</a>
+                    <form th:action="@{'/atendentes/deletar/' + ${iterStat.index}}" method="post" style="display:inline; width:100%;">
+                        <button type="submit" class="btn btn-danger btn-sm flex-fill" style="min-width: 80px;" onclick="return confirm('Tem certeza que deseja deletar?');">Deletar</button>
+                    </form>
+                </div>
             </td>
         </tr>
         </tbody>

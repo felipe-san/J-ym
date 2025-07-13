@@ -8,7 +8,7 @@
 <body>
 <div class="container mt-5">
     <h2 th:text="${#strings.isEmpty(indice) ? 'Novo Atendente' : 'Editar Atendente'}"></h2>
-    <form th:action="${#strings.isEmpty(indice) ? '/atendentes/criar' : '/atendentes/editar/' + indice}" method="post">
+    <form th:action="${#strings.isEmpty(indice) ? '/atendentes/criar' : '/atendentes/editar/' + indice}" method="post" id="atendenteForm">
         <div class="mb-3">
             <label for="nome" class="form-label">Nome</label>
             <input type="text" class="form-control" id="nome" name="nome" th:value="${atendente.nome}" required>
@@ -37,7 +37,7 @@
         </div>
         <div class="mb-3">
             <label for="dataNascimento" class="form-label">Data de Nascimento</label>
-            <input type="date" class="form-control" id="dataNascimento" name="dataNascimento" th:value="${atendente.dataNascimento}" required>
+            <input type="date" class="form-control" id="dataNascimento" name="dataNascimento" th:value="${atendente.dataNascimento != null && atendente.dataNascimento.matches('\\d{2}/\\d{2}/\\d{4}') ? (atendente.dataNascimento.substring(6,10) + '-' + atendente.dataNascimento.substring(3,5) + '-' + atendente.dataNascimento.substring(0,2)) : atendente.dataNascimento}" required>
         </div>
         <div class="mb-3">
             <label for="tipoContrato" class="form-label">Tipo de Contrato</label>
@@ -51,7 +51,7 @@
         </div>
         <div class="mb-3">
             <label for="dataAdmissao" class="form-label">Data de Admissão</label>
-            <input type="date" class="form-control" id="dataAdmissao" name="dataAdmissao" th:value="${atendente.dataAdmissao}" required>
+            <input type="date" class="form-control" id="dataAdmissao" name="dataAdmissao" th:value="${atendente.dataAdmissao != null && atendente.dataAdmissao.matches('\\d{2}/\\d{2}/\\d{4}') ? (atendente.dataAdmissao.substring(6,10) + '-' + atendente.dataAdmissao.substring(3,5) + '-' + atendente.dataAdmissao.substring(0,2)) : atendente.dataAdmissao}" required>
         </div>
         <div class="mb-3">
             <label for="ctps" class="form-label">CTPS</label>
@@ -59,6 +59,7 @@
         </div>
         <button type="submit" class="btn btn-primary">Salvar</button>
         <a th:href="@{/atendentes}" class="btn btn-secondary">Cancelar</a>
+    </form>
     </form>
 </div>
 </body>
