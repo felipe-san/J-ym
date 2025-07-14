@@ -3,8 +3,12 @@
 <head>
     <title>Lista de Atendentes</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/day-night.css">
 </head>
 <body>
+<div style="position: fixed; top: 1.5rem; right: 2rem; z-index: 2000;">
+  <button class="toggle-btn" id="toggleModeBtn" title="Alternar modo claro/escuro" aria-label="Alternar modo claro/escuro">🌙</button>
+</div>
 <div class="container mt-5">
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h1>Atendentes</h1>
@@ -38,6 +42,28 @@
             <td th:text="${atendente.genero}"></td>
             <td th:text="${atendente.salario}"></td>
             <td th:text="${atendente.setor}"></td>
+<script>
+const btn = document.getElementById('toggleModeBtn');
+const setMode = (night) => {
+    if (night) {
+        document.body.classList.add('night-mode');
+        btn.textContent = '☀️';
+    } else {
+        document.body.classList.remove('night-mode');
+        btn.textContent = '🌙';
+    }
+    localStorage.setItem('nightMode', night ? '1' : '0');
+};
+btn.addEventListener('click', () => {
+    const isNight = !document.body.classList.contains('night-mode');
+    setMode(isNight);
+});
+if (localStorage.getItem('nightMode') === '1') {
+    setMode(true);
+} else {
+    setMode(false);
+}
+</script>
             <td th:text="${atendente.turno != null ? atendente.turno.turno : ''}"></td>
             <td th:text="${atendente.dataNascimento != null && atendente.dataNascimento.matches('\\d{4}-\\d{2}-\\d{2}') ? (atendente.dataNascimento.substring(8,10) + '/' + atendente.dataNascimento.substring(5,7) + '/' + atendente.dataNascimento.substring(0,4)) : atendente.dataNascimento}"></td>
             <td th:text="${atendente.tipoContrato != null ? atendente.tipoContrato.contrato : ''}"></td>

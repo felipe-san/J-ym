@@ -21,23 +21,32 @@ public class ExercicioDAO {
 
     }
 
-    public List<Exercicio> lerExercicios(){
+    public List<Exercicio> lerExercicios() {
         List<Exercicio> exercicios = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(dbPath))) {
             reader.readLine();
             String line;
-            while ((line = reader.readLine()) != null){
-                String data[] = line.split(",");
-                if (data[0].contains("EXERCICIO")){
-                    exercicios.add(new Exercicio(data[12], data[13], Integer.parseInt(data[14]), Integer.parseInt(data[15]), Float.parseFloat(data[16]), Integer.parseInt(data[17])));
+            while ((line = reader.readLine()) != null) {
+                String[] data = line.split(",");
+                if (data.length >= 18 && data[0].contains("EXERCICIO")) {
+                    try {
+                        String nome = data[12];
+                        String local = data[13];
+                        int series = Integer.parseInt(data[14]);
+                        int repeticoes = Integer.parseInt(data[15]);
+                        float carga = Float.parseFloat(data[16]);
+                        int tempoDescanso = Integer.parseInt(data[17]);
+                        exercicios.add(new Exercicio(nome, local, series, repeticoes, carga, tempoDescanso));
+                    } catch (Exception e) {
+                        // Skip malformed exercicio line
+                        System.err.println("Linha EXERCICIO ignorada por erro de parse: " + line);
+                    }
                 }
             }
-            
         } catch (IOException e) {
             System.out.println("DAO deu merda...");
             e.printStackTrace();
         }
-        
         return exercicios;
     }
 
@@ -55,13 +64,15 @@ public class ExercicioDAO {
         }
     }
 
-    public void atualizarExercicio(Exercicio exercicio, int indiceBuscado){
+    public void atualizarExercicio(Exercicio exercicio, int indiceBuscado) {
         try {
             Path caminho = Paths.get(dbPath);
             List<String> linhas = Files.readAllLines(caminho);
             int exercicioIndex = -1;
-            for (int i = 0, count = 0; i < linhas.size(); i++) {
-                if (linhas.get(i).startsWith("EXERCICIO")) {
+            int count = 0;
+            for (int i = 1; i < linhas.size(); i++) { // skip header
+                String line = linhas.get(i);
+                if (line.startsWith("EXERCICIO")) {
                     if (count == indiceBuscado) {
                         exercicioIndex = i;
                         break;
@@ -81,13 +92,15 @@ public class ExercicioDAO {
         }
     }
 
-    public void destruirExercicio(int indiceBuscado){
+    public void destruirExercicio(int indiceBuscado) {
         try {
             Path caminho = Paths.get(dbPath);
             List<String> linhas = Files.readAllLines(caminho);
             int exercicioIndex = -1;
-            for (int i = 0, count = 0; i < linhas.size(); i++) {
-                if (linhas.get(i).startsWith("EXERCICIO")) {
+            int count = 0;
+            for (int i = 1; i < linhas.size(); i++) { // skip header
+                String line = linhas.get(i);
+                if (line.startsWith("EXERCICIO")) {
                     if (count == indiceBuscado) {
                         exercicioIndex = i;
                         break;

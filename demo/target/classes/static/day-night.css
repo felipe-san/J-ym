@@ -1,0 +1,112 @@
+/* Increase top margin for all content except the day/night icon */
+.container.mt-5 {
+    margin-top: 6.5rem !important;
+}
+/* Table styling for day/night mode */
+table {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    border-color: #dee2e6;
+    transition: background 0.3s, color 0.3s;
+}
+
+.night-mode table {
+    background-color: #23272b;
+    color: #f1f1f1;
+    border-color: #444;
+}
+
+th, td {
+    background-color: inherit;
+    color: inherit;
+    transition: background 0.3s, color 0.3s;
+}
+
+.night-mode th, .night-mode td {
+    background-color: #23272b;
+    color: #f1f1f1;
+}
+/* day-night.css */
+:root {
+    --bg-color: #fff;
+    --text-color: #222;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background 0.3s, color 0.3s;
+}
+
+.night-mode {
+    --bg-color: #181818;
+    --text-color: #f1f1f1;
+}
+
+.toggle-btn {
+    position: fixed;
+    top: 1.5rem;
+    right: 3.2rem;
+    background: transparent;
+    border: none;
+    border-radius: 50%;
+    padding: 0.5rem;
+    cursor: pointer;
+    font-size: 2rem;
+    z-index: 2000;
+    box-shadow: none;
+    color: #111;
+    /* transition removed for hover animation */
+}
+
+.toggle-btn:hover {
+    background: #eee;
+    color: #222;
+}
+
+.night-mode .toggle-btn {
+    background: transparent;
+    color: #fff;
+}
+
+.night-mode .toggle-btn:hover {
+    background: transparent;
+    color: #ffd700;
+}
+
+.night-mode .toggle-btn {
+    background: transparent;
+    color: #fff;
+}
+
+
+/* Style all buttons except the day/night toggle */
+button:not(.toggle-btn),
+.btn:not(.toggle-btn) {
+    background-color: #111;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    /* transition removed for hover animation */
+}
+
+button:not(.toggle-btn):hover,
+.btn:not(.toggle-btn):hover {
+    background-color: #333;
+    color: #fff;
+}
+
+
+
+.night-mode button:not(.toggle-btn),
+.night-mode .btn:not(.toggle-btn) {
+    background-color: #fff;
+    color: #111;
+    border: none;
+}
+
+.night-mode button:not(.toggle-btn):hover,
+.night-mode .btn:not(.toggle-btn):hover {
+    background-color: #e0e0e0;
+    color: #111;
+}

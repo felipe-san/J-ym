@@ -4,8 +4,12 @@
     <meta charset="UTF-8">
     <title>Novo Atendente</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/day-night.css">
 </head>
 <body>
+<div style="position: fixed; top: 1.5rem; right: 2rem; z-index: 2000;">
+  <button class="toggle-btn" id="toggleModeBtn" title="Alternar modo claro/escuro" aria-label="Alternar modo claro/escuro">🌙</button>
+</div>
 <div class="container mt-5">
     <h2 th:text="${#strings.isEmpty(indice) ? 'Novo Atendente' : 'Editar Atendente'}"></h2>
     <form th:action="${#strings.isEmpty(indice) ? '/atendentes/criar' : '/atendentes/editar/' + indice}" method="post" id="atendenteForm">
@@ -38,6 +42,28 @@
         <div class="mb-3">
             <label for="dataNascimento" class="form-label">Data de Nascimento</label>
             <input type="date" class="form-control" id="dataNascimento" name="dataNascimento" th:value="${atendente.dataNascimento != null && atendente.dataNascimento.matches('\\d{2}/\\d{2}/\\d{4}') ? (atendente.dataNascimento.substring(6,10) + '-' + atendente.dataNascimento.substring(3,5) + '-' + atendente.dataNascimento.substring(0,2)) : atendente.dataNascimento}" required>
+<script>
+const btn = document.getElementById('toggleModeBtn');
+const setMode = (night) => {
+    if (night) {
+        document.body.classList.add('night-mode');
+        btn.textContent = '☀️';
+    } else {
+        document.body.classList.remove('night-mode');
+        btn.textContent = '🌙';
+    }
+    localStorage.setItem('nightMode', night ? '1' : '0');
+};
+btn.addEventListener('click', () => {
+    const isNight = !document.body.classList.contains('night-mode');
+    setMode(isNight);
+});
+if (localStorage.getItem('nightMode') === '1') {
+    setMode(true);
+} else {
+    setMode(false);
+}
+</script>
         </div>
         <div class="mb-3">
             <label for="tipoContrato" class="form-label">Tipo de Contrato</label>
